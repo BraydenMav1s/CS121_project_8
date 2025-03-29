@@ -10,11 +10,11 @@
 
 - 0) Exit System
 
-- 1) Login as Admin
+-  1) Login as Admin
 
-- 2) Login as Customer
+-  2) Login as Customer
 
-- 3) Prompt the user for a choice (0-2).
+-  3) Prompt the user for a choice (0-2).
 
 - Read user input.
 
