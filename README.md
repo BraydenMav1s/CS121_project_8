@@ -8,13 +8,13 @@
 
 - Show the user a menu with the following options:
 
-- 0) Exit System
+0) Exit System
 
--  1) Login as Admin
+1) Login as Admin
 
--  2) Login as Customer
+2) Login as Customer
 
--  3) Prompt the user for a choice (0-2).
+3) Prompt the user for a choice (0-2).
 
 - Read user input.
 
@@ -69,15 +69,15 @@
 ### Customer Menu
 - Display a menu with the following options:
 
-- 0) Exit Customer Menu
+0) Exit Customer Menu
 
-- 1) Check Balances
+1) Check Balances
 
-- 2) Deposit Funds
+2) Deposit Funds
 
-- 3) Withdraw Funds
+3) Withdraw Funds
 
-- 4) Transfer Funds
+4) Transfer Funds
 
 - Prompt the user for a choice (0-4).
 
