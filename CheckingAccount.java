@@ -1,79 +1,92 @@
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
-public class CheckingAccount implements HasMenu {
-    private double balance;
+class CheckingAccount implements HasMenu{
+  double balance;
 
-    public CheckingAccount() {
-        this.balance = 0.0;
-    }
+  public static void main(String[] args){
+    CheckingAccount ca = new CheckingAccount();
+    ca.start();
+  } 
 
-    public CheckingAccount(double balance) {
-        this.balance = balance;
-    }
+  public CheckingAccount(){
+    this.balance = 0d;
+  }  
 
-    public double getBalance() {
-        return this.balance;
-    }
+  public CheckingAccount(double balance){
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
+  } 
 
-    public void checkBalance() {
-        System.out.println("Current balance: $" + balance);
-    }
+  public void start(){
+    boolean keepGoing=true;
+    while(keepGoing){
+      String response = menu();
+      if(response.equals("0")){
+        keepGoing=false;
+      } 
+      if(response.equals("1")){
+        System.out.println("Checking balance...");
+	this.checkBalance();
+      } 
+      if(response.equals("2")){
+        System.out.println("Making a deposit...");
+	this.makeDeposit();
+      } 
+      if(response.equals("3")){
+        System.out.println("Making a withdrawal...");
+	this.makeWithdrawal();
+      } 
 
-    public void makeDeposit() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter deposit amount: ");
-        double amount = scanner.nextDouble();
-        if (amount > 0) {
-            balance += amount;
-            System.out.println("New balance: $" + balance);
-        } else {
-            System.out.println("Deposit must be positive.");
-        }
-    }
+    } 
+  } 
+  public String menu(){
+    System.out.println("\n\nAccount menu\n");
+    Scanner input = new Scanner(System.in);
+    System.out.println("0) Quit");
+    System.out.println("1) Check balance");
+    System.out.println("2) Make a deposit");
+    System.out.println("3) Make a withdrawal\n");
+    System.out.println("Please enter 0-3: ");
+    String user = input.nextLine();
+    return user;
+  } 
 
-    public void makeWithdrawal() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter withdrawal amount: ");
-        double amount = scanner.nextDouble();
-        if (amount > 0 && amount <= balance) {
-            balance -= amount;
-            System.out.println("New balance: $" + balance);
-        } else {
-            System.out.println("Invalid withdrawal amount.");
-        }
-    }
+  public void checkBalance(){
+    System.out.println("Current balance: " + this.getBalanceString());
+  } 
 
-    public void menu() {
-        System.out.print("1) Get your current balance.\n");
-        System.out.print("2) Deposit money into an account.\n");
-        System.out.print("3) Withdraw money from an account.\n");
-        System.out.print("0) Exit\n");
-    }
+  public String getBalanceString(){
+    String result = String.format("$%.02f", this.balance);
+    return result;
+  } 
 
-    public void start() {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            menu();
-            System.out.print("Choose an option: ");
-            int choice = scanner.nextInt();
-            if (choice == 1) checkBalance();
-            else if (choice == 2) makeDeposit();
-            else if (choice == 3) makeWithdrawal();
-            else if (choice == 0) {
-                System.out.println("Exiting...");
-                break;
-            } else {
-                System.out.println("Invalid option. Try again.");
-            }
-        }
-    }
+  public void makeDeposit(){
+    System.out.print("How much to deposit? ");
+    double depo = getDouble();
+    this.balance = this.balance + depo;
+    System.out.println("New balance: " + this.getBalanceString());
+  } 
 
-    public static void main(String[] args) {
-        CheckingAccount account = new CheckingAccount(100);
-        account.start();
-    }
-}
+  public void makeWithdrawal(){
+    System.out.print("How much to withdraw? ");
+    double repo = getDouble();
+    this.balance = this.balance - repo;
+    System.out.println("New balance: " + this.getBalanceString());
+  } 
+
+  private double getDouble(){
+    Scanner input = new Scanner(System.in);
+    double num = 0d;
+    String stringNum = input.nextLine();
+    try{
+      num = Double.parseDouble(stringNum);
+    } 
+    catch(Exception e){
+      System.out.print("That is not a valid input");
+      num = 0;
+    } 
+    
+    return num;
+  } 
+
+} 
